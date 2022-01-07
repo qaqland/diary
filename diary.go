@@ -7,7 +7,6 @@ import (
 )
 
 func main() {
-	fmt.Println("123")
 	diary, err := git.OpenRepository("./")
 	if err != nil {
 		fmt.Println("open git repo err:", err)
@@ -19,6 +18,15 @@ func main() {
 		fmt.Println("lookup commit err:", err)
 	}
 	message := last_commit.Message()
+	date := last_commit.Author().When
+	fmt.Println(date, message)
 
-	fmt.Println(message)
+	count := last_commit.ParentCount()
+	var i uint
+	for i = 0; i < count; i++ {
+		parent_commit := last_commit.Parent(i)
+		message := parent_commit.Message()
+		date := parent_commit.Author().When
+		fmt.Println(date, message)
+	}
 }
