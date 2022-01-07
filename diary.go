@@ -17,16 +17,24 @@ func main() {
 	if err != nil {
 		fmt.Println("lookup commit err:", err)
 	}
-	message := last_commit.Message()
-	date := last_commit.Author().When
-	fmt.Println(date, message)
+	show(last_commit)
 
 	count := last_commit.ParentCount()
+	parent_commit := last_commit.Parent(0)
+	// 可能会很多 commit 产生一个 commit
+	// count = 0 走到了重点
+	// count = 1 有一个爸爸
+	// count = 2 有两个爸爸
+
 	var i uint
 	for i = 0; i < count; i++ {
-		parent_commit := last_commit.Parent(i)
-		message := parent_commit.Message()
-		date := parent_commit.Author().When
-		fmt.Println(date, message)
+		parent_commit = parent_commit.Parent(0)
+		show(parent_commit)
 	}
+
+}
+func show(commit *git.Commit) {
+	message := commit.Message()
+	date := commit.Author().When
+	fmt.Println(date, message)
 }
