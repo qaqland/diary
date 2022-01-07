@@ -47,8 +47,8 @@ func parent(commit *git.Commit) {
 	// count = 1 有一个爸爸
 	// count = 2 有两个爸爸
 	for i = 0; i < count; i++ {
-		commit := commit.Parent(i)
-		parent(commit)
+		next_commit := commit.Parent(i)
+		parent(next_commit)
 	}
 }
 
