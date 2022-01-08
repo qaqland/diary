@@ -14,6 +14,7 @@ guoyi 说她要写完之后同步到 git 备份，不如直接在 git commit 写
 
 不同分支应该有不同的处理，但当前不处理
 
-# 用到的库
+# 用到的
 
-libgit2
+libgit2 等
+https://github.com/yihui/hugo-xmin
