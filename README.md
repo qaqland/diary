@@ -29,4 +29,4 @@ https://github.com/yihui/hugo-xmin
 2. 把 `git2go` 复制出来
 3. 编译 C 代码 `make install-static` （ `libgit2` 的编译也需要安装一些软件，看这里 `https://libgit2.org/docs/guides/build-and-link/` ）
 4. `go mod` 修改 `replace`
-5. `go build -tags static diary.go`
+5. `go build -tags static diary`
