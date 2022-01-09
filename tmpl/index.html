@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="utf-8">
@@ -10,19 +10,50 @@
 </head>
 
 <body>
+    <div style="display: none;">
+        <span id="here">{{ .Here }}</span>
+        <span id="len">{{ .Len }}</span>
+    </div>
     <nav>
         <ul class="menu">
             <li><a href="https://github.com/qaqland/diary">项目地址</a></li>
+            <li><a href="./index.html">首页</a></li>
         </ul>
         <hr />
     </nav>
     <ul>
-        {{ range  .}}
+        {{ range .Final_commit }}
         <li>
             <div class="date">{{ .Author.When }}</div>
-            {{ .Message}}
+            <div>
+                <pre>{{ .Message }}</pre>
+            </div>
         </li>
         {{ end }}
     </ul>
+    <nav>
+        <ul class="menu">
+            <a id="left">上一页</a>
+            <span>第 {{ .Here }} 页 共{{ .Len }}页</span>
+            <a id="right">下一页</a>
+        </ul>
+    </nav>
+    <script>
+        let here = document.getElementById("here").innerText;
+        let len = document.getElementById("len").innerText;
+        let left = parseInt(here) - 1;
+        let right = parseInt(here) + 1;
+        let aleft = document.getElementById("left");
+        let aright = document.getElementById("right");
+        aleft.href = "./" + left + ".html";
+        aright.href = "./" + right + ".html";
+        if (here === "1") {
+            aleft.style = "visibility:hidden;";
+        }
+        if (here === len) {
+            aright.style = "visibility:hidden;";
+        }
+    </script>
 </body>
+
 </html>

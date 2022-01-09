@@ -2,10 +2,8 @@ package main
 
 import (
 	"fmt"
-	"html/template"
 	"io"
 	"io/fs"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -67,35 +65,6 @@ func exist_mk(name string) {
 			}
 			return
 		}
-		fmt.Println(err)
-		return
-	}
-}
-
-func read_tmpl() string {
-	f, err := ioutil.ReadFile("./tmpl/index.html")
-	if err != nil {
-		fmt.Println("read tmpl err", err)
-		return ""
-	}
-	return string(f)
-}
-
-func parser_tmpl() {
-	public_index, err := os.OpenFile(Public+"/index.html",
-		os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	defer public_index.Close()
-	index_tmpl, err := template.New("index").Parse(read_tmpl())
-	if err != nil {
-		fmt.Println(err)
-		return
-	}
-	err = index_tmpl.Execute(public_index, Link_commit)
-	if err != nil {
 		fmt.Println(err)
 		return
 	}

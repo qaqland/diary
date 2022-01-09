@@ -70,4 +70,4 @@ func parent(commit *git.Commit) {
 	}
 }
 
-// go build -tags static,system_libgit2 diary.go
+// go build -tags static diary
