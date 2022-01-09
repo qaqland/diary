@@ -45,7 +45,11 @@
         let right = parseInt(here) + 1;
         let aleft = document.getElementById("left");
         let aright = document.getElementById("right");
-        aleft.href = "./" + left + ".html";
+        if (aleft == 1) {
+            aleft.href = "./index.html";
+        } else {
+            aleft.href = "./" + left + ".html";
+        }
         aright.href = "./" + right + ".html";
         if (here === "1") {
             aleft.style = "visibility:hidden;";
