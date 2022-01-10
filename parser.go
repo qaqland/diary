@@ -1,9 +1,9 @@
 package main
 
 import (
-	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"os"
 	"strconv"
 
@@ -16,21 +16,11 @@ type Fianl struct {
 	Len          int
 }
 
-func read_tmpl() string {
-	f, err := ioutil.ReadFile("./tmpl/index.html")
-	if err != nil {
-		fmt.Println("read tmpl err", err)
-		return ""
-	}
-	return string(f)
-}
-
-func parser_tmpl() {
+func pagination_tmpl() {
 	len := len(Link_commit)
 	I, K := len/Pagination, len%Pagination
-	// (0 -> i - 1) * Pagination + (0 -> Pagination - 1)
-	// i * Pagination + (0 -> k - 1)
-	// 55 20 /=2 %=15
+
+	// 开始的几页完整的
 	final_c := make([]*git.Commit, Pagination)
 	for i := 0; i < I; i++ {
 		for k := 0; k < Pagination; k++ {
@@ -38,17 +28,19 @@ func parser_tmpl() {
 		}
 		final_s := Fianl{final_c, i + 1, I + 1}
 		if err := write(final_s); err != nil {
-			fmt.Println(err)
+			log.Println(err)
 			return
 		}
 	}
+	
+	// 最后一页
 	final_c_end := make([]*git.Commit, K)
 	for k := 0; k < K; k++ {
 		final_c_end[k] = Link_commit[I*Pagination+k]
 	}
 	final_s := Fianl{final_c_end, I + 1, I + 1} // 未测试
 	if err := write(final_s); err != nil {
-		fmt.Println(err)
+		log.Println(err)
 		return
 	}
 }
@@ -59,7 +51,7 @@ func write(final Fianl) error {
 		html_index = "index"
 	}
 	public_index, err := os.OpenFile(Public+"/"+html_index+".html",
-		os.O_WRONLY|os.O_TRUNC|os.O_CREATE, 0666)
+		os.O_WRONLY|os.O_TRUNC|os.O_CREATE, os.ModePerm)
 	if err != nil {
 		return err
 	}
@@ -72,4 +64,13 @@ func write(final Fianl) error {
 		return err
 	}
 	return nil
+}
+
+func read_tmpl() string {
+	f, err := ioutil.ReadFile("./tmpl/index.html")
+	if err != nil {
+		log.Println("read tmpl/index.html err", err)
+		return ""
+	}
+	return string(f)
 }

@@ -22,14 +22,12 @@
         <hr />
     </nav>
     <ul>
-        {{ range .Final_commit }}
+        {{- range .Final_commit -}}
         <li>
             <div class="date">{{ .Author.When }}</div>
-            <div>
-                <pre>{{ .Message }}</pre>
-            </div>
+            <div><pre>{{ .Message }}</pre></div>
         </li>
-        {{ end }}
+        {{- end -}}
     </ul>
     <nav>
         <ul class="menu">
@@ -45,7 +43,7 @@
         let right = parseInt(here) + 1;
         let aleft = document.getElementById("left");
         let aright = document.getElementById("right");
-        if (aleft == 1) {
+        if (left == 1) {
             aleft.href = "./index.html";
         } else {
             aleft.href = "./" + left + ".html";
