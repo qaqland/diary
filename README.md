@@ -1,4 +1,6 @@
 # diary
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqaqland%2Fdiary.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqaqland%2Fdiary?ref=badge_shield)
+
 
 给自己写的小日记本
 
@@ -77,3 +79,6 @@ qaq
 ---
 
 Copyright (c) 2022 王小明
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fqaqland%2Fdiary.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fqaqland%2Fdiary?ref=badge_large)
